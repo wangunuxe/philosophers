@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jili <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/03 11:52:55 by jili              #+#    #+#             */
+/*   Updated: 2025/08/03 11:52:57 by jili             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 static bool	contains_only_digits(char *str)
@@ -14,11 +26,6 @@ static bool	contains_only_digits(char *str)
 	return (true);
 }
 
-/*positive_integer_atoi
-** Description : Converts a digit_only string into a positive integer
-** Return      : Return the convered number between 0 and INT_MAX
-				 return -1 if the converted number exceed INT_MAX
-*/
 int	positive_integer_atoi(char *str)
 {
 	unsigned long long int	nb;
@@ -36,15 +43,6 @@ int	positive_integer_atoi(char *str)
 	return ((int)nb);
 }
 
-/*is_valid_input
-** Description : checks if all required arguments are valid: 
-i.e. they are a string of digits only, which does not exceed 
-INT_MAX.
-Also checks if the number of philosophes is valid
-** Parameters  : Describe parameters
-** Return      : Return true if all agruments are valid, 
-false if one of them is invalid.
-*/
 bool	is_valid_input(int argc, char **argv)
 {
 	int	i;

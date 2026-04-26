@@ -1,15 +1,12 @@
 NAME = philo
 CC = cc
-CFLAGS = -Werror -Wall -Wextra -pthread
+CFLAGS = -Werror -Wall -Wextra
 
 #Run 'make re MODE=debug for debug mode
 #Run 'make re MODE=debug_thread for debug mode and information of data race
 MODE = none
 ifeq ($(MODE), debug)
 	CFLAGS += -D DEBUG_FORMATTING=1
-endif
-ifeq ($(MODE), debug_thread)
-	CFLAGS += -D DEBUG_FORMATTING=1 -fsanitize=thread -g
 endif
 
 SRC_PATH = source/

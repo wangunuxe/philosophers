@@ -1,14 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jili <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/03 11:51:45 by jili              #+#    #+#             */
+/*   Updated: 2025/08/03 11:51:48 by jili             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
-/*assign_forks:
-** Description : Assigne two fork_ids to each philosopher. 
-odd-numbered philosophers get their fork order switched. 
-This is the order in which philosophers take their forks matters; 
-	*Even-numbered philosophers take the left fork first, then the right; 
-	odd-numbered philosophers take the right fork first, then the left.
-	*Avoid deadlock
-	*(philo->id + 1) % (philo->table->nb_philos) is the number 
-	of the next philo, and the number of the right fork
-*/
+
 static void	assign_forks(t_philo *philo)
 {
 	philo->forks[0] = philo->id;
@@ -20,14 +23,6 @@ static void	assign_forks(t_philo *philo)
 	}
 }
 
-/*init_philosophers:
-** Description : Allocates memory for each philosopher and initializes 
-their elements
-		initializes the mutex meal_time_lock
-** Parameters  : t_table	*table
-** Return      : Return a pointer to the array of philosophers(t_philos philos)
- or NULL if the initialization failed
-*/
 static t_philo	**init_philosophers(t_table *table)
 {
 	t_philo			**philos;
@@ -53,9 +48,6 @@ static t_philo	**init_philosophers(t_table *table)
 	return (philos);
 }
 
-/*init_forks:
-** Description : Allocates memory for the array of fork_mutex, and initializes 
-*/
 static pthread_mutex_t	*init_forks(t_table *table)
 {
 	pthread_mutex_t	*forks;
@@ -86,13 +78,6 @@ static bool	init_global_mutexes(t_table *table)
 	return (true);
 }
 
-/*init_table:
-** Description : Initializes the "table" that is the date structure 
-containing all of the progrem's parametters.
-** Parameters  : int argc, char **argv, int i (for indicate argv[i])
-** Return      : Returns a pointer to the allocated table strcture, 
-or NULL of an error occuredd during initialization
-*/
 t_table	*init_table(int argc, char **argv, int i)
 {
 	t_table	*table;

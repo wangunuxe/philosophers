@@ -1,20 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jili <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/03 11:52:43 by jili              #+#    #+#             */
+/*   Updated: 2025/08/03 11:52:45 by jili             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
-/*start_simulation
-** Description : lauches the simulation by creating a grim_reaper thread 
-as one thread for each philosopher
-** Parameters  : table
-** Return      : Returns true if the simulation was successfully started, 
-false if there was an error
-** Detail : table->nb_philos * 2 * 10 : 
-Multiply the number of philosophers (table->nb_philos), by 2 (possibly to 
-account for both thinking and eating time or thread creation delay), then 
-multiply by 10 to convert it into a meaningful time unit (milliseconds)
-*/
+
 static bool	start_simulation(t_table *table)
 {
 	unsigned int	i;
 
 	table->start_time = get_time_in_ms() + (table->nb_philos * 2 * 10);
+	i = 0;
+	while (i < table->nb_philos)
+	{
+		table->philos[i]->last_meal = table->start_time;
+		i++;
+	}
 	i = 0;
 	while (i < table->nb_philos)
 	{
@@ -32,10 +40,6 @@ static bool	start_simulation(t_table *table)
 	return (true);
 }
 
-/*stop_simulatition
-** Description : Waits for all threads to be joined then 
-destroys mutexes and frees allocated memory
-*/
 static void	stop_simulation(t_table *table)
 {
 	unsigned int	i;

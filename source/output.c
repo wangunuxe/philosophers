@@ -1,7 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   output.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jili <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/03 11:51:55 by jili              #+#    #+#             */
+/*   Updated: 2025/08/03 11:51:57 by jili             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
-/*debug_mode_help
-** Description : helper function of debug_mode_print
-*/
+
 static void	debug_mode_help(t_philo *philo, char *color, \
 	char *str, t_status status)
 {
@@ -19,10 +29,6 @@ static void	debug_mode_help(t_philo *philo, char *color, \
 		color, philo->id + 1, str);
 }
 
-/*write_status_debug --->debug mode output
-** Description : Redirects the status writing for debug mode. 
-For this option, the DEBUG_FORMATTING option must be set to 1 in philo.h
-*/
 static void	debug_mode_print(t_philo *philo, t_status status)
 {
 	if (status == DIED)
@@ -39,31 +45,12 @@ static void	debug_mode_print(t_philo *philo, t_status status)
 		debug_mode_help(philo, PURPLE, "has taken a fork", status);
 }
 
-/*normal_mode_print ---> normal mode output
-** Description : Prints a philosopher's state in plain text as 
-required by the project subhect : timestamp_in_ms X has taken a fork
-*/
 static void	normal_mode_print(t_philo *philo, char *str)
 {
 	printf("%ld %d %s\n", \
 		get_time_in_ms() - philo->table->start_time, philo->id + 1, str);
 }
 
-/* write_status
-** Description : Prints the status of philosophers as long as the 
-simulation is still active; Locks the write mutex to avoid intertwined 
-messages from different threads;
-If DEBUG_FORMATTING is set to 1 in philo.h, the status will be formatted 
-with colors and extra information to help with debugging. 
-Otherwise, the output will be the regular format required by the project subject
-
-**reaper_report: If the simulation has already ended and the current 
-print is not triggered by the reaper thread, then no further status 
-messages should be printed.
-This parameter is used to distinguish between regualer thread status messages 
-and reaper thread, preventing any thread from printing after the 
-simulation has stopped.
-*/
 void	write_status(t_philo *philo, bool reaper_report, t_status status)
 {
 	pthread_mutex_lock(&philo->table->write_lock);
@@ -91,13 +78,6 @@ void	write_status(t_philo *philo, bool reaper_report, t_status status)
 	pthread_mutex_unlock(&philo->table->write_lock);
 }
 
-/*write_fullcount
-** Description : prints the outcome of the simulation if a 
-must_eat_count (the number of times to eat) was specified.
-	*Outputs how many philosophers met the required number of meals 
-	after the simullation ends
-** Detail :       Only used for the debug purposes.
-*/
 void	write_fullcount(t_table *table)
 {
 	unsigned int	i;

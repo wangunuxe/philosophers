@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jili <jili@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/03 11:50:52 by jili              #+#    #+#             */
+/*   Updated: 2025/08/03 11:56:01 by jili             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -13,11 +25,11 @@
 ******************************************************************************/
 
 # define MAX_PHILOS 250
-# define STR_MAX_PHILOS "250"//for printing the message of error
+# define STR_MAX_PHILOS "250"
 
-# ifndef DEBUG_FORMATTING 
+# ifndef DEBUG_FORMATTING
 #  define DEBUG_FORMATTING 0
-# endif//for debug
+# endif
 
 # define NC "\e[0m"
 # define RED "\e[31m"
@@ -51,8 +63,8 @@ typedef struct s_table
 	time_t			time_to_eat;
 	time_t			time_to_sleep;
 	int				must_eat_count;
-	bool			sim_stop;// the flag that indicates the end of simulation
-	pthread_mutex_t	sim_stop_lock;// the mutex for protect the variable sim_stop
+	bool			sim_stop;
+	pthread_mutex_t	sim_stop_lock;
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	*fork_locks;
 	t_philo			**philos;

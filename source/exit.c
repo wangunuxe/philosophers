@@ -1,9 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jili <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/03 11:51:36 by jili              #+#    #+#             */
+/*   Updated: 2025/08/03 11:51:38 by jili             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-/* message_error
-** Description : Writes a message to the console. 
-	Returns the provided exit number.
-*/
 int	message_error(char *str, char *detail, int exit_no)
 {
 	if (!detail)
@@ -13,12 +21,6 @@ int	message_error(char *str, char *detail, int exit_no)
 	return (exit_no);
 }
 
-/*free_table
-** Description : free all of memory allocated by the programme
-** Parameters  : t_table *table
-** Return      : Return a NULL pointer if there is nothing to free, 
-or when all memory has been freed
-*/
 void	*free_table(t_table *table)
 {
 	unsigned int	i;
@@ -57,16 +59,6 @@ void	destroy_mutexes(t_table *table)
 	pthread_mutex_destroy(&table->sim_stop_lock);
 }
 
-/*error_null
-** Description : error management during initialisation
-	during initialization, free any allocated memory and print an 
-	error message, and return a NULL pointer;
-** Parameters  :
-	*char *str ---> the first parameter of printf, that is the format 
-	string and is defined in the Macros
-	*char *details ---> the value of the second %s of format string, 
-	(the first is STR_PROG_NAME)
-*/
 void	*error_null(char *str, char *details, t_table *table)
 {
 	if (table != NULL)
@@ -75,9 +67,6 @@ void	*error_null(char *str, char *details, t_table *table)
 	return (NULL);
 }
 
-/*error_failure
-	return 0 to indicate failure
-*/
 int	error_failure(char *str, char *details, t_table *table)
 {
 	if (table != NULL)
